@@ -1,0 +1,51 @@
+<div nz-flex [nzVertical]="isVertical" nzGap="24px">
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a mode" [(ngModel)]="selectedMode">
+    <nz-option nzLabel="LCL" nzValue="LCL"></nz-option>
+    <nz-option nzLabel="Fcl" nzValue="Fcl"></nz-option>
+    <nz-option nzLabel="Air" nzValue="Air"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a movement type" [(ngModel)]="selectedMovementType">
+    <nz-option nzLabel="Door to Door" nzValue="Door to Door"></nz-option>
+    <nz-option nzLabel="Port to Door" nzValue="Port to Door"></nz-option>
+    <nz-option nzLabel="Door to Port" nzValue="Door to Port"></nz-option>
+    <nz-option nzLabel="Port to Port" nzValue="Port to Port"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a incoterms" [(ngModel)]="selectedIncoterms">
+    <nz-option nzLabel="Delivered Duty Paid (DDP)" nzValue="Delivered Duty Paid (DDP)"></nz-option>
+    <nz-option nzLabel="Delivered At Place (DAT)" nzValue="Delivered At Place (DAT)"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="countries-cities" [(ngModel)]="selectedCountriesCities">
+    <nz-option-group nzLabel="USA">
+      <nz-option nzValue="New York" nzLabel="New York"></nz-option>
+      <nz-option nzValue="Los Angeles" nzLabel="Los Angeles"></nz-option>
+      <nz-option nzValue="Miami" nzLabel="Miami"></nz-option>
+      <nz-option nzValue="Minnesota" nzLabel="Minnesota"></nz-option>
+    </nz-option-group>
+    <nz-option-group nzLabel="China">
+      <nz-option nzValue="Beijing" nzLabel="Beijing"></nz-option>
+      <nz-option nzValue="Shanghai" nzLabel="Shanghai"></nz-option>
+    </nz-option-group>
+    <nz-option-group nzLabel="Turkey">
+      <nz-option nzValue="Istanbul" nzLabel="Istanbul"></nz-option>
+      <nz-option nzValue="Izmir" nzLabel="Izmir"></nz-option>
+    </nz-option-group>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a package type" [(ngModel)]="selectedPackageType">
+    <nz-option nzLabel="Pallets" nzValue="Pallets"></nz-option>
+    <nz-option nzLabel="Boxes" nzValue="Boxes"></nz-option>
+    <nz-option nzLabel="Cartons" nzValue="Cartons"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a unit -1" [(ngModel)]="selectedUnit1">
+    <nz-option nzLabel="CM" nzValue="CM"></nz-option>
+    <nz-option nzLabel="IN" nzValue="IN"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a unit -2" [(ngModel)]="selectedUnit2">
+    <nz-option nzLabel="KG" nzValue="KG"></nz-option>
+    <nz-option nzLabel="LB" nzValue="LB"></nz-option>
+  </nz-select>
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a currency" [(ngModel)]="selectedCurrency">
+    <nz-option nzLabel="USD - US Dollar" nzValue="USD"></nz-option>
+    <nz-option nzLabel="CNY - Chinese Yuan" nzValue="CNY"></nz-option>
+    <nz-option nzLabel="TRY - Turkish Lira" nzValue="TRY"></nz-option>
+  </nz-select>
+</div>
