@@ -22,33 +22,56 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 })
 export class InchToCmConverterComponent {
   conversionForm: FormGroup;
-  result: number | null = null;
-
-  isVisible = false;
+  result: number | null = null; // This stores the conversion result (in cm)
+  isVisible = false; // Flag to control the visibility of the modal
 
   constructor(private fb: FormBuilder) {
-    // Reactive form oluşturuluyor
+    // Initialize the form with a control for 'inchValue' with validation
     this.conversionForm = this.fb.group({
-      inch: ['', [Validators.required, Validators.min(0)]]
+      inchValue: ['', [Validators.required, Validators.min(0)]], // Requires a positive inch value
     });
   }
 
-  // Dönüştürme işlemi
+  /**
+   * Converts the input inch value to centimeters.
+   */
   convertToCm(): void {
     if (this.conversionForm.valid) {
-      const inch = this.conversionForm.get('inch')?.value;
-      this.result = inch * 2.54;
+      // Retrieve the value of 'inchValue' from the form
+      const inch = this.conversionForm.get('inchValue')?.value;
+      // Perform the conversion and store the result
+      this.result = this.calculateCm(inch);
     }
   }
 
+  /**
+   * Helper function to calculate centimeters from inches.
+   * @param inch The inch value entered by the user
+   * @returns The equivalent value in centimeters
+   */
+  private calculateCm(inch: number): number {
+    return inch * 2.54; // Conversion factor for inches to centimeters
+  }
+
+  /**
+   * Shows the modal when the 'Open Converter' button is clicked.
+   */
   showModal(): void {
     this.isVisible = true;
   }
 
+  /**
+   * Handles the OK button click on the modal.
+   * Closes the modal.
+   */
   handleOk(): void {
     this.isVisible = false;
   }
 
+  /**
+   * Handles the Cancel button click on the modal.
+   * Closes the modal.
+   */
   handleCancel(): void {
     this.isVisible = false;
   }

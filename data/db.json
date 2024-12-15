@@ -19,6 +19,21 @@
       "id": "a014",
       "username": "test@example.com",
       "password": "password123"
+    },
+    {
+      "id": "8908",
+      "username": "halilbskan@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "5c0e",
+      "email": "halilbskan2@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "407f",
+      "username": "halilbskan2@gmail.com",
+      "password": "1234"
     }
   ],
   "offerItems": {
@@ -148,6 +163,20 @@
       "unit2Value": "6",
       "currency": "USD",
       "palletCount": 720
+    },
+    {
+      "id": "9a02",
+      "mode": "LCL",
+      "movementType": "Port to Door",
+      "incoterms": "Delivered Duty Paid (DDP)",
+      "countriesCities": "New York",
+      "packageType": "Pallet",
+      "unit1": "CM",
+      "unit1Value": "12",
+      "unit2": "KG",
+      "unit2Value": "23",
+      "currency": "USD",
+      "palletCount": 1
     }
   ]
 }
