@@ -1,4 +1,26 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "email": "test@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "0985",
+      "email": "halilbskan@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "a16d",
+      "username": "halilbskan@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "a014",
+      "username": "test@example.com",
+      "password": "password123"
+    }
+  ],
   "offerItems": {
     "modes": [
       "LCL",

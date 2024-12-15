@@ -14,6 +14,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzFormModule, NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,14 +29,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   validateForm = this.fb.group({
     email: this.fb.control('', [Validators.email, Validators.required]),
     password: this.fb.control('', [Validators.required]),
-    checkPassword: this.fb.control('', [Validators.required, this.confirmationValidator])
+    checkPassword: this.fb.control('', [Validators.required])
   });
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
     theme: 'twotone'
   };
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.validateForm.controls.password.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
@@ -49,7 +51,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const email = this.validateForm.get('email')?.value ?? '';
+      const password = this.validateForm.get('password')?.value ?? '';
+
+      this.authService.register(email, password).subscribe(
+        (response) => {
+          console.log('Registration successful!', response);
+          
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Registration failed:', error);
+        }
+      );
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
