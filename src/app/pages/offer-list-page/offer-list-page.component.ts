@@ -8,95 +8,161 @@ import {
   NzTableSortFn,
   NzTableSortOrder
 } from 'ng-zorro-antd/table';
-
-interface ItemData {
-  name: string;
-  age: number;
-  address: string;
-}
+import { OfferItems } from '../../models/offer-item.model';
+import { OfferListItems } from '../../models/offer-list.model';
+import { OffersService } from '../../services/offers.service';
+import { InchToCmConverterComponent } from '../../components/inch-to-cm-converter/inch-to-cm-converter.component';
 
 interface ColumnItem {
   name: string;
   sortOrder: NzTableSortOrder | null;
-  sortFn: NzTableSortFn<ItemData> | null;
+  sortFn: NzTableSortFn<OfferListItems> | null;
   listOfFilter: NzTableFilterList;
-  filterFn: NzTableFilterFn<ItemData> | null;
+  filterFn: NzTableFilterFn<OfferListItems> | null;
 }
 
 @Component({
   selector: 'app-offer-list-page',
   standalone: true,
-  imports: [NzButtonModule, NzTableModule],
+  imports: [NzButtonModule, NzTableModule, InchToCmConverterComponent],
   templateUrl: './offer-list-page.component.html',
   styleUrls: ['./offer-list-page.component.scss']
 })
 export class OfferListPageComponent {
+  listOfData: OfferListItems[] = []
+  offerItems: OfferItems = {
+    modes: [],
+    movementTypes: [],
+    incoterms: [],
+    countriesCities: {
+      USA: [],
+      China: [],
+      Turkey: [],
+    },
+    packageTypes: [],
+    unit1: [],
+    unit2: [],
+    currencies: [],
+  };
+
+  columnGenerator() {
+    this.listOfColumns.forEach(column => {
+      if (column.name === 'Mode') {
+        column.listOfFilter = this.offerItems.modes.map(mode => ({
+          text: mode,
+          value: mode
+        }));
+      } else if (column.name === 'Movement Type') {
+        column.listOfFilter = this.offerItems.movementTypes.map(movementType => ({
+          text: movementType,
+          value: movementType
+        }));
+      } else if (column.name === 'Incoterms') {
+        column.listOfFilter = this.offerItems.incoterms.map(incoterm => ({
+          text: incoterm,
+          value: incoterm
+        }));
+      } else if (column.name === 'Package Type') {
+        column.listOfFilter = this.offerItems.packageTypes.map(packageTypes => ({
+          text: packageTypes,
+          value: packageTypes
+        }));
+      }
+    });
+  }
+
+  getOffersList(): void {
+    this.offersService.getOffersList().subscribe(
+      (response) => {
+        this.listOfData = response;
+      },
+      (error) => {
+        console.error('Error fetching offers:', error);
+      }
+    );
+  }
+
+  getOfferItems(): void {
+    this.offersService.getOfferItems().subscribe(
+      (response: OfferItems) => {
+        this.offerItems = response;
+
+        this.columnGenerator();
+      },
+      (error) => {
+        console.error('Error fetching offer items:', error);
+      }
+    );
+  }
+
   listOfColumns: ColumnItem[] = [
     {
-      name: 'Name',
+      name: 'Mode',
       sortOrder: null,
-      sortFn: (a: ItemData, b: ItemData) => a.name.localeCompare(b.name),
-      listOfFilter: [
-        { text: 'Joe', value: 'Joe' },
-        { text: 'Jim', value: 'Jim' }
-      ],
-      filterFn: (list: string[], item: ItemData) => list.some(name => item.name.indexOf(name) !== -1)
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.mode.localeCompare(b.mode),
+      listOfFilter: [],
+      filterFn: (mode: string[], item: OfferListItems) => mode.some(mode => item.mode.indexOf(mode) !== -1)
     },
     {
-      name: 'Age',
+      name: 'Movement Type',
       sortOrder: null,
-      sortFn: (a: ItemData, b: ItemData) => a.age - b.age,
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.movementType.localeCompare(b.movementType),
+      listOfFilter: [],
+      filterFn: (movementType: string[], item: OfferListItems) => movementType.some(movementType => item.movementType.indexOf(movementType) !== -1)
+    },
+    {
+      name: 'Incoterms',
+      sortOrder: null,
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.incoterms.localeCompare(b.incoterms),
+      listOfFilter: [],
+      filterFn: (incoterms: string[], item: OfferListItems) => incoterms.some(incoterms => item.incoterms.indexOf(incoterms) !== -1)
+    },
+    {
+      name: 'Countries-Cities',
+      sortOrder: null,
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.countriesCities.localeCompare(b.countriesCities),
       listOfFilter: [],
       filterFn: null
     },
     {
-      name: 'Address',
-      sortFn: null,
+      name: 'Package Type',
       sortOrder: null,
-      listOfFilter: [
-        { text: 'London', value: 'London' },
-        { text: 'Sidney', value: 'Sidney' }
-      ],
-      filterFn: (address: string, item: ItemData) => item.address.indexOf(address) !== -1
-    }
-  ];
-  listOfData: ItemData[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.packageType.localeCompare(b.packageType),
+      listOfFilter: [],
+      filterFn: (packageType: string, item: OfferListItems) => item.packageType.indexOf(packageType) !== -1
     },
     {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      name: 'Unit-1',
+      sortOrder: null,
+      sortFn: null,
+      listOfFilter: [],
+      filterFn: null
     },
     {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      name: 'Unit-2',
+      sortOrder: null,
+      sortFn: null,
+      listOfFilter: [],
+      filterFn: null
     },
     {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
+      name: 'Pallet Count',
+      sortOrder: null,
+      sortFn: null,
+      listOfFilter: [],
+      filterFn: null
+    },
+    {
+      name: 'Currency',
+      sortOrder: null,
+      sortFn: (a: OfferListItems, b: OfferListItems) => a.currency.localeCompare(b.currency),
+      listOfFilter: [],
+      filterFn: null
     }
   ];
 
   resetFilters(): void {
-    this.listOfColumns.forEach(item => {
-      if (item.name === 'Name') {
-        item.listOfFilter = [
-          { text: 'Joe', value: 'Joe' },
-          { text: 'Jim', value: 'Jim' }
-        ];
-      } else if (item.name === 'Address') {
-        item.listOfFilter = [
-          { text: 'London', value: 'London' },
-          { text: 'Sidney', value: 'Sidney' }
-        ];
-      }
-    });
+    this.columnGenerator();
   }
 
   resetSortAndFilters(): void {
@@ -104,5 +170,13 @@ export class OfferListPageComponent {
       item.sortOrder = null;
     });
     this.resetFilters();
+  }
+
+  constructor(private offersService: OffersService
+  ) { }
+
+  ngOnInit(): void {
+    this.getOffersList();
+    this.getOfferItems();
   }
 }

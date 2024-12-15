@@ -1,0 +1,25 @@
+<button nz-button [nzType]="'default'" (click)="showModal()" class="show-convert"><span>Inch to Centimeter
+        Converter</span></button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Inch to Centimeter Converter" (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="conversionForm" (ngSubmit)="convertToCm()">
+            <nz-form-item>
+                <nz-form-control [nzErrorTip]="'Please enter a valid value!'">
+                    <nz-input-group nzSize="large">
+                        <input type="number" nz-input formControlName="inch" placeholder="Enter value in inches" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <button nz-button nzType="primary" nzSize="large" [disabled]="conversionForm.invalid">Convert</button>
+            </nz-form-item>
+        </form>
+
+        <div *ngIf="result !== null" class="result">
+            <h3>Result:</h3>
+            <p>{{ result }} cm</p>
+        </div>
+    </ng-container>
+</nz-modal>

@@ -1,0 +1,131 @@
+{
+  "offerItems": {
+    "modes": [
+      "LCL",
+      "FCL",
+      "Air"
+    ],
+    "movementTypes": [
+      "Door to Door",
+      "Port to Door",
+      "Door to Port",
+      "Port to Port"
+    ],
+    "incoterms": [
+      "Delivered Duty Paid (DDP)",
+      "Delivered At Place (DAT)"
+    ],
+    "countriesCities": {
+      "USA": [
+        "New York",
+        "Los Angeles",
+        "Miami",
+        "Minnesota"
+      ],
+      "China": [
+        "Beijing",
+        "Shanghai"
+      ],
+      "Turkey": [
+        "Istanbul",
+        "Izmir"
+      ]
+    },
+    "packageTypes": [
+      "Pallet",
+      "Box",
+      "Carton"
+    ],
+    "unit1": [
+      "CM",
+      "IN"
+    ],
+    "unit2": [
+      "KG",
+      "LB"
+    ],
+    "currencies": [
+      "USD - US Dollar",
+      "CNY - Chinese Yuan",
+      "TRY - Turkish Lira"
+    ]
+  },
+  "dimensions": [
+    {
+      "type": "Carton",
+      "width": 12,
+      "length": 12,
+      "height": 12
+    },
+    {
+      "type": "Box",
+      "width": 24,
+      "length": 16,
+      "height": 12
+    },
+    {
+      "type": "Pallet",
+      "width": 40,
+      "length": 48,
+      "height": 60
+    }
+  ],
+  "offers": [
+    {
+      "id": "f7fe",
+      "mode": "Fcl",
+      "movementType": "Port to Door",
+      "incoterms": "Delivered At Place (DAT)",
+      "countriesCities": "New York",
+      "packageType": "Box",
+      "unit1": "CM",
+      "unit1Value": "4",
+      "unit2": "KG",
+      "unit2Value": "5",
+      "currency": "USD",
+      "palletCount": 15
+    },
+    {
+      "id": "6cdc",
+      "mode": "Fcl",
+      "movementType": "Port to Door",
+      "incoterms": "Delivered Duty Paid (DDP)",
+      "countriesCities": "Los Angeles",
+      "packageType": "Box",
+      "unit1": "CM",
+      "unit1Value": "4",
+      "unit2": "KG",
+      "unit2Value": "12",
+      "currency": "CNY",
+      "palletCount": 15
+    },
+    {
+      "id": "4754",
+      "mode": "LCL",
+      "movementType": "Port to Port",
+      "incoterms": "Delivered At Place (DAT)",
+      "countriesCities": "Istanbul",
+      "packageType": "Box",
+      "unit1": "CM",
+      "unit1Value": "12",
+      "unit2": "KG",
+      "unit2Value": "5",
+      "currency": "USD",
+      "palletCount": 15
+    },
+    {
+      "id": "9b34",
+      "mode": "Air",
+      "movementType": "Port to Port",
+      "incoterms": "Delivered Duty Paid (DDP)",
+      "countriesCities": "Beijing",
+      "packageType": "Carton",
+      "unit1": "CM",
+      "unit1Value": "4",
+      "unit2": "KG",
+      "unit2Value": "6",
+      "currency": "USD",
+      "palletCount": 720
+    }
+  ]
+}
